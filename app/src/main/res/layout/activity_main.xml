@@ -26,7 +26,7 @@
         </FrameLayout>
 
         <LinearLayout
-            android:layout_width="336dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -36,12 +36,24 @@
                 android:layout_height="wrap_content"
                 android:text="廟宇名稱查詢" />
 
-            <EditText
-                android:id="@+id/ET_Name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ET_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <SearchView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/TV_Local"
@@ -49,12 +61,24 @@
                 android:layout_height="wrap_content"
                 android:text="全台地區查詢" />
 
-            <EditText
-                android:id="@+id/ET_Local"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ET_Local"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <SearchView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/TV_God"
@@ -62,12 +86,24 @@
                 android:layout_height="wrap_content"
                 android:text="廟宇種類(主神)查詢" />
 
-            <EditText
-                android:id="@+id/ET_God"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ET_God"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <SearchView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
         </LinearLayout>
 

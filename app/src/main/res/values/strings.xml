@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Find Temple</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_name__page">Name_Page</string>
+    <string name="title_activity_local__page">Local_Page</string>
+    <string name="title_activity_god__page">God_Page</string>
 </resources>
