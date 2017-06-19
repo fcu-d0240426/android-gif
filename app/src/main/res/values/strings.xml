@@ -1,0 +1,7 @@
+<resources>
+    <string name="action_settings">action_settings</string>
+    <string name="app_name">app_name</string>
+    <string name="title_activity_name__page">title_activity_name__page</string>
+    <string name="title_activity_local__page">title_activity_local__page</string>
+    <string name="title_activity_god__page">title_activity_god__page</string>
+</resources>
