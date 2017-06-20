@@ -36,24 +36,25 @@
                 android:layout_height="wrap_content"
                 android:text="廟宇名稱查詢" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/searchTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:drawable/ic_menu_search"/>
 
                 <EditText
                     android:id="@+id/ET_Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_toLeftOf="@+id/searchTemp"
                     android:ems="10"
                     android:inputType="textPersonName" />
-
-                <SearchView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/TV_Local"
@@ -61,24 +62,25 @@
                 android:layout_height="wrap_content"
                 android:text="全台地區查詢" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/searchLocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:drawable/ic_menu_search"/>
 
                 <EditText
                     android:id="@+id/ET_Local"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_toLeftOf="@+id/searchLocal"
                     android:ems="10"
                     android:inputType="textPersonName" />
-
-                <SearchView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/TV_God"
@@ -86,24 +88,25 @@
                 android:layout_height="wrap_content"
                 android:text="廟宇種類(主神)查詢" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/searchGod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:drawable/ic_menu_search"/>
 
                 <EditText
                     android:id="@+id/ET_God"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_toLeftOf="@+id/searchGod"
                     android:ems="10"
                     android:inputType="textPersonName" />
-
-                <SearchView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 
