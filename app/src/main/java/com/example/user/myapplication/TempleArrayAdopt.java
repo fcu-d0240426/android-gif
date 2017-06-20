@@ -33,12 +33,12 @@ class TempleArrayAdopt extends ArrayAdapter<Temple> {
             itemlayout =(LinearLayout) convertView;
         }
         Temple item = (Temple)getItem(position);
-        TextView tvname = (TextView) itemlayout.findViewById(R.id.itemtv);
+        TextView tvname = (TextView) itemlayout.findViewById(R.id.tempName);
         tvname.setText(item.getName());
-//        TextView tvKind = (TextView) itemlayout.findViewById(R.id.tv_lind);
-//        tvKind.setText(item.getKind());
-//        TextView tvAddress= (TextView) itemlayout.findViewById(R.id.tv_address);
-//        tvAddress.setText(item.getAddress());
+        TextView tvKind = (TextView) itemlayout.findViewById(R.id.tempKind);
+        tvKind.setText(item.getKind());
+        TextView tvAddress= (TextView) itemlayout.findViewById(R.id.tempAddr);
+        tvAddress.setText(item.getAddress());
 
         return itemlayout;
     }

@@ -1,5 +1,6 @@
 package com.example.user.myapplication;
 
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.ListViewAutoScrollHelper;
@@ -21,6 +22,26 @@ import java.util.List;
 public class activity_research_result extends AppCompatActivity {
 
     TextView test;
+    List<Temple> lsTemple;
+    private TempleArrayAdopt adapter = null;
+    private static final int LIST_TEMP = 1;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case LIST_TEMP:
+                    List<Temple> temples = (List<Temple>)msg.obj;
+                    refreshTempleList(temples);
+                    break;
+            }
+        }
+    };
+
+    private void refreshTempleList(List<Temple> temples){
+        adapter.clear();
+        adapter.addAll(temples);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +50,8 @@ public class activity_research_result extends AppCompatActivity {
 
         ListView lvTemple = (ListView)findViewById(R.id.lv);
 
-        TempleArrayAdopt adapt = new TempleArrayAdopt(this, new ArrayList<Temple>());
-        lvTemple.setAdapter(adapt);
-
-        test = (TextView)findViewById(R.id.test);
+        adapter = new TempleArrayAdopt(this, new ArrayList<Temple>());
+        lvTemple.setAdapter(adapter);
 
         getTempleFromFirebase();
     }
@@ -42,40 +61,10 @@ public class activity_research_result extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Temple> lsTemple = new ArrayList<>();
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                     DataSnapshot dsSName = ds.child("寺 廟 名 稱");
-                     DataSnapshot  dsSKine = ds.child("奉祀主神");
-                     DataSnapshot dsSAdrress = ds.child("寺 廟 住 址");
-
-                     String name =(String)dsSName.getValue();
-                     String kind =(String)dsSKine.getValue();
-                     String address =(String)dsSAdrress.getValue();
-
-                    Temple aTemple = new Temple();
-                    aTemple.setName(name);
-                    aTemple.setKind(kind);
-                    aTemple.setAddress(address);
-                    lsTemple.add(aTemple);
-
-                    Log.v("Temple",name + ";" + kind +";" +address);
-
-
-                    Message msg = new Message();
-                    msg.what = List_Temple;
-                    msg.obj = lsPets;
-                    handler.sendMessage(msg);
-
-
-                }
-            }
+            public void onDataChange(DataSnapshot dataSnapshot) {new FirebaseThread(dataSnapshot).start();}
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                   Log.v("Temple",databaseError.getMessage());
-
-            }
+            public void onCancelled(DatabaseError databaseError){Log.v("Temple",databaseError.getMessage());}
         });
 
 
@@ -83,5 +72,47 @@ public class activity_research_result extends AppCompatActivity {
 
     }
 
+    class FirebaseThread extends Thread{
+        private DataSnapshot dataSnapshot;
 
+        public FirebaseThread(DataSnapshot dataSnapshot){
+            this.dataSnapshot = dataSnapshot;
+        }
+
+        @Override
+        public void run() {
+            lsTemple = new ArrayList<>();
+            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                DataSnapshot dsSName = ds.child("寺 廟 名 稱");
+                DataSnapshot  dsSKine = ds.child("奉祀主神");
+                DataSnapshot dsSAdrress = ds.child("寺 廟 住 址");
+
+                String name =(String)dsSName.getValue();
+                name = name.replaceAll("\\s", "");
+                String kind =(String)dsSKine.getValue();
+                String address =(String)dsSAdrress.getValue();
+
+                if (name.equals("") || kind.equals("") || address.equals("")){
+                    continue;
+                }
+
+                if(name.length() > 10){
+                    name = name.substring(0, 10) + "\n" + name.substring(10, name.length());
+                }
+
+                Temple aTemple = new Temple();
+                aTemple.setName(name);
+                aTemple.setKind(kind);
+                aTemple.setAddress(address);
+                lsTemple.add(aTemple);
+
+                Log.v("Temple",name + ";" + kind +";" +address);
+
+                Message msg = new Message();
+                msg.what = LIST_TEMP;
+                msg.obj = lsTemple;
+                handler.sendMessage(msg);
+            }
+        }
+    }
 }
